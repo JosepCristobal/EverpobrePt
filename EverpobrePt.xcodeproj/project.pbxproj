@@ -8,20 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		79C2810D208B6907004E03E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2810C208B6907004E03E3 /* AppDelegate.swift */; };
-		79C2810F208B6907004E03E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2810E208B6907004E03E3 /* ViewController.swift */; };
-		79C28112208B6907004E03E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C28110208B6907004E03E3 /* Main.storyboard */; };
 		79C28114208B6908004E03E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79C28113208B6908004E03E3 /* Assets.xcassets */; };
 		79C28117208B6908004E03E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C28115208B6908004E03E3 /* LaunchScreen.storyboard */; };
+		79C28120208B7B73004E03E3 /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2811F208B7B73004E03E3 /* ManagedObject.swift */; };
+		79C28123208B7BF0004E03E3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C28122208B7BF0004E03E3 /* DataManager.swift */; };
+		79C28126208B7DBF004E03E3 /* Everpobre.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79C28124208B7DBF004E03E3 /* Everpobre.xcdatamodeld */; };
+		79C28129208B878D004E03E3 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C28127208B878D004E03E3 /* NoteViewController.swift */; };
+		79C2812A208B878D004E03E3 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C28128208B878D004E03E3 /* NoteViewController.xib */; };
+		79C2812D208B88B2004E03E3 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2812B208B88B2004E03E3 /* NotesTableViewController.swift */; };
+		79C2812E208B88B2004E03E3 /* NotesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C2812C208B88B2004E03E3 /* NotesTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		79C28109208B6907004E03E3 /* EverpobrePt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EverpobrePt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C2810C208B6907004E03E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		79C2810E208B6907004E03E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		79C28111208B6907004E03E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79C28113208B6908004E03E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79C28116208B6908004E03E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79C28118208B6908004E03E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79C2811F208B7B73004E03E3 /* ManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
+		79C28122208B7BF0004E03E3 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		79C28125208B7DBF004E03E3 /* Everpobre.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Everpobre.xcdatamodel; sourceTree = "<group>"; };
+		79C28127208B878D004E03E3 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		79C28128208B878D004E03E3 /* NoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteViewController.xib; sourceTree = "<group>"; };
+		79C2812B208B88B2004E03E3 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		79C2812C208B88B2004E03E3 /* NotesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesTableViewController.xib; sourceTree = "<group>"; };
+		79C2812F208B9931004E03E3 /* EverpobrePt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EverpobrePt.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +65,36 @@
 		79C2810B208B6907004E03E3 /* EverpobrePt */ = {
 			isa = PBXGroup;
 			children = (
+				79C2812F208B9931004E03E3 /* EverpobrePt.entitlements */,
+				79C2811E208B7B0F004E03E3 /* Model */,
 				79C2810C208B6907004E03E3 /* AppDelegate.swift */,
-				79C2810E208B6907004E03E3 /* ViewController.swift */,
-				79C28110208B6907004E03E3 /* Main.storyboard */,
 				79C28113208B6908004E03E3 /* Assets.xcassets */,
 				79C28115208B6908004E03E3 /* LaunchScreen.storyboard */,
 				79C28118208B6908004E03E3 /* Info.plist */,
+				79C28127208B878D004E03E3 /* NoteViewController.swift */,
+				79C28128208B878D004E03E3 /* NoteViewController.xib */,
+				79C2812B208B88B2004E03E3 /* NotesTableViewController.swift */,
+				79C2812C208B88B2004E03E3 /* NotesTableViewController.xib */,
 			);
 			path = EverpobrePt;
+			sourceTree = "<group>";
+		};
+		79C2811E208B7B0F004E03E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79C28121208B7BB3004E03E3 /* ManagedObject */,
+				79C28122208B7BF0004E03E3 /* DataManager.swift */,
+				79C28124208B7DBF004E03E3 /* Everpobre.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		79C28121208B7BB3004E03E3 /* ManagedObject */ = {
+			isa = PBXGroup;
+			children = (
+				79C2811F208B7B73004E03E3 /* ManagedObject.swift */,
+			);
+			path = ManagedObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +129,11 @@
 				TargetAttributes = {
 					79C28108208B6907004E03E3 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -123,8 +161,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				79C28117208B6908004E03E3 /* LaunchScreen.storyboard in Resources */,
+				79C2812E208B88B2004E03E3 /* NotesTableViewController.xib in Resources */,
+				79C2812A208B878D004E03E3 /* NoteViewController.xib in Resources */,
 				79C28114208B6908004E03E3 /* Assets.xcassets in Resources */,
-				79C28112208B6907004E03E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,22 +174,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79C2810F208B6907004E03E3 /* ViewController.swift in Sources */,
+				79C28123208B7BF0004E03E3 /* DataManager.swift in Sources */,
+				79C28126208B7DBF004E03E3 /* Everpobre.xcdatamodeld in Sources */,
 				79C2810D208B6907004E03E3 /* AppDelegate.swift in Sources */,
+				79C28129208B878D004E03E3 /* NoteViewController.swift in Sources */,
+				79C28120208B7B73004E03E3 /* ManagedObject.swift in Sources */,
+				79C2812D208B88B2004E03E3 /* NotesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		79C28110208B6907004E03E3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				79C28111208B6907004E03E3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		79C28115208B6908004E03E3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -280,6 +315,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EverpobrePt/EverpobrePt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33W2XLA9ZF;
 				INFOPLIST_FILE = EverpobrePt/Info.plist;
@@ -298,6 +334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EverpobrePt/EverpobrePt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33W2XLA9ZF;
 				INFOPLIST_FILE = EverpobrePt/Info.plist;
@@ -334,6 +371,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		79C28124208B7DBF004E03E3 /* Everpobre.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				79C28125208B7DBF004E03E3 /* Everpobre.xcdatamodel */,
+			);
+			currentVersion = 79C28125208B7DBF004E03E3 /* Everpobre.xcdatamodel */;
+			path = Everpobre.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 79C28101208B6907004E03E3 /* Project object */;
 }
