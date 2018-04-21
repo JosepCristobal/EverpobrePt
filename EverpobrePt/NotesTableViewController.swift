@@ -97,6 +97,17 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         return fetchedResultController.sections![section].name
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            // Delete the row from the data source
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    
     @objc func addNewNote()  {
         
         // Grabamos una nota en un hilo de background
@@ -107,12 +118,11 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
             let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into: privateMOC) as! Note
             //Utilizamos KVC
             let dict = ["title":"Nueva nota from KVC","createdAtTI":Date().timeIntervalSince1970] as [String : Any]
-            
             //        note.title = "Nueva nota"
             //        note.createdAtTI = Date().timeIntervalSince1970
             
             note.setValuesForKeys(dict)
-            
+        
             try! privateMOC.save()
         }
     }
@@ -121,22 +131,28 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         tableView.reloadData()
     }
     @objc func addNewNotebook() {
-        let privateMOC2 = DataManager.sharedManager.persistentContainer.newBackgroundContext()
         
-        privateMOC2.perform {
-            
-            let notebook = NSEntityDescription.insertNewObject(forEntityName: "Notebook", into: privateMOC2) as! Notebook
-            //Utilizamos KVC
-            let totalNote = notebook.notes?.count
-            print(totalNote)
-            let dict = ["name":"Nuevo Notebook KVC","isDefault":"1"] as [String : Any]
-            
-            //        note.title = "Nueva nota"
-            //        note.createdAtTI = Date().timeIntervalSince1970
-            
-            notebook.setValuesForKeys(dict)
-            
-            try! privateMOC2.save()
-        }
+        let notebook = NSEntityDescription.insertNewObject(forEntityName: "Notebook", into:
+        DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
+        notebook.name = "Nuevo Notebook3"
+        notebook.isDefault = 0
+        
+        try! DataManager.sharedManager.persistentContainer.viewContext.save()
+        
+    }
+    func addProves(notes: Note){
+        let notebook = NSEntityDescription.insertNewObject(forEntityName: "Notebook", into:
+            DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
+        notebook.name = "Nuevo Notebook Proves"
+        notebook.isDefault = 0
+        notebook.addToNotes(notes)
+        
+        try! DataManager.sharedManager.persistentContainer.viewContext.save()
+    }
+    func deleteNotes(notes: Note){
+        let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into:
+            DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
+        
+        try! DataManager.sharedManager.persistentContainer.viewContext.save()
     }
 }
