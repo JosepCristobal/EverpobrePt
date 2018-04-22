@@ -27,9 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.makeKeyAndVisible()
         
-        //let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         
-        //print(documentDirectory.absoluteString)
+        print(documentDirectory.absoluteString)
         
         return true
     }
