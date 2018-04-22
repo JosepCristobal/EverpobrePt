@@ -17,6 +17,8 @@
 		79C2812A208B878D004E03E3 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C28128208B878D004E03E3 /* NoteViewController.xib */; };
 		79C2812D208B88B2004E03E3 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2812B208B88B2004E03E3 /* NotesTableViewController.swift */; };
 		79C2812E208B88B2004E03E3 /* NotesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C2812C208B88B2004E03E3 /* NotesTableViewController.xib */; };
+		79C28132208BF171004E03E3 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C28130208BF171004E03E3 /* ModalViewController.swift */; };
+		79C28133208BF171004E03E3 /* ModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C28131208BF171004E03E3 /* ModalViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		79C2812B208B88B2004E03E3 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		79C2812C208B88B2004E03E3 /* NotesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesTableViewController.xib; sourceTree = "<group>"; };
 		79C2812F208B9931004E03E3 /* EverpobrePt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EverpobrePt.entitlements; sourceTree = "<group>"; };
+		79C28130208BF171004E03E3 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		79C28131208BF171004E03E3 /* ModalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 				79C28128208B878D004E03E3 /* NoteViewController.xib */,
 				79C2812B208B88B2004E03E3 /* NotesTableViewController.swift */,
 				79C2812C208B88B2004E03E3 /* NotesTableViewController.xib */,
+				79C28130208BF171004E03E3 /* ModalViewController.swift */,
+				79C28131208BF171004E03E3 /* ModalViewController.xib */,
 			);
 			path = EverpobrePt;
 			sourceTree = "<group>";
@@ -161,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79C28117208B6908004E03E3 /* LaunchScreen.storyboard in Resources */,
+				79C28133208BF171004E03E3 /* ModalViewController.xib in Resources */,
 				79C2812E208B88B2004E03E3 /* NotesTableViewController.xib in Resources */,
 				79C2812A208B878D004E03E3 /* NoteViewController.xib in Resources */,
 				79C28114208B6908004E03E3 /* Assets.xcassets in Resources */,
@@ -180,6 +187,7 @@
 				79C28129208B878D004E03E3 /* NoteViewController.swift in Sources */,
 				79C28120208B7B73004E03E3 /* ManagedObject.swift in Sources */,
 				79C2812D208B88B2004E03E3 /* NotesTableViewController.swift in Sources */,
+				79C28132208BF171004E03E3 /* ModalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

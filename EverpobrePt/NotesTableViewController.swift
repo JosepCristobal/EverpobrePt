@@ -11,16 +11,17 @@ import CoreData
 
 class NotesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    
     var fetchedResultController : NSFetchedResultsController<Note>!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let bt1 = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addNewNotebook))
+        let bt2 = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showModal))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewNote))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addNewNotebook))
+        
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addNewNotebook))
+        navigationItem.leftBarButtonItems = [bt1, bt2]
         
         // Fetch Request.
         let viewMOC = DataManager.sharedManager.persistentContainer.viewContext
@@ -55,8 +56,6 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         try! fetchedResultController.performFetch()
         
         fetchedResultController.delegate = self
-
-        
     }
     
     
@@ -82,7 +81,6 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         }
         
         cell?.textLabel?.text = fetchedResultController.object(at: indexPath).title
-        
         return cell!
     }
     
@@ -90,6 +88,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let noteViewController = NoteViewController()
         noteViewController.note = fetchedResultController.object(at: indexPath)
+        addProves(notes: fetchedResultController.object(at: indexPath))
         navigationController?.pushViewController(noteViewController, animated: true)
     }
     
@@ -99,9 +98,8 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("Deleted")
-            // Delete the row from the data source
-            //tableView.deleteRows(at: [indexPath], with: .fade)
+            deleteNotes(notes: fetchedResultController.object(at: indexPath))
+
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
@@ -143,16 +141,28 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     func addProves(notes: Note){
         let notebook = NSEntityDescription.insertNewObject(forEntityName: "Notebook", into:
             DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
-        notebook.name = "Nuevo Notebook Proves"
+        notebook.name = "Nuevo Notebook3"
         notebook.isDefault = 0
         notebook.addToNotes(notes)
         
         try! DataManager.sharedManager.persistentContainer.viewContext.save()
+    
     }
     func deleteNotes(notes: Note){
-        let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into:
-            DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
+        //let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into:
+          //  DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
         
+        try! DataManager.sharedManager.persistentContainer.viewContext.delete(notes)
         try! DataManager.sharedManager.persistentContainer.viewContext.save()
+    }
+    
+    @objc func showModal() {
+        let modalViewController = ModalViewController()
+      
+        self.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        // Cover Vertical is necessary for CurrentContext
+        self.modalPresentationStyle = .currentContext
+        // Display on top of    current UIView
+        self.present(modalViewController, animated: true, completion: nil)
     }
 }
