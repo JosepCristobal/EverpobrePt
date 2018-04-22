@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // let noteVC = NoteViewByCodeController()  // NoteViewController()  //
         let notesTVC = NotesTableViewController(style: .plain)
-    
+        notesTVC.title = "Everpobre Notes"
         let navController = UINavigationController(rootViewController: notesTVC)
         
         window?.rootViewController = navController

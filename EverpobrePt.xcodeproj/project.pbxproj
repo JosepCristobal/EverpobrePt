@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7966185D208C95FB0037AA55 /* UIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7966185C208C95FB0037AA55 /* UIViewController+Additions.swift */; };
+		79661860208CAC940037AA55 /* ModalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7966185E208CAC940037AA55 /* ModalTableViewController.swift */; };
+		79661861208CAC940037AA55 /* ModalTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7966185F208CAC940037AA55 /* ModalTableViewController.xib */; };
 		79C2810D208B6907004E03E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2810C208B6907004E03E3 /* AppDelegate.swift */; };
 		79C28114208B6908004E03E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79C28113208B6908004E03E3 /* Assets.xcassets */; };
 		79C28117208B6908004E03E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C28115208B6908004E03E3 /* LaunchScreen.storyboard */; };
@@ -17,11 +20,12 @@
 		79C2812A208B878D004E03E3 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C28128208B878D004E03E3 /* NoteViewController.xib */; };
 		79C2812D208B88B2004E03E3 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2812B208B88B2004E03E3 /* NotesTableViewController.swift */; };
 		79C2812E208B88B2004E03E3 /* NotesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C2812C208B88B2004E03E3 /* NotesTableViewController.xib */; };
-		79C28132208BF171004E03E3 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C28130208BF171004E03E3 /* ModalViewController.swift */; };
-		79C28133208BF171004E03E3 /* ModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C28131208BF171004E03E3 /* ModalViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7966185C208C95FB0037AA55 /* UIViewController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Additions.swift"; sourceTree = "<group>"; };
+		7966185E208CAC940037AA55 /* ModalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTableViewController.swift; sourceTree = "<group>"; };
+		7966185F208CAC940037AA55 /* ModalTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalTableViewController.xib; sourceTree = "<group>"; };
 		79C28109208B6907004E03E3 /* EverpobrePt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EverpobrePt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C2810C208B6907004E03E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79C28113208B6908004E03E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -35,8 +39,6 @@
 		79C2812B208B88B2004E03E3 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		79C2812C208B88B2004E03E3 /* NotesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesTableViewController.xib; sourceTree = "<group>"; };
 		79C2812F208B9931004E03E3 /* EverpobrePt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EverpobrePt.entitlements; sourceTree = "<group>"; };
-		79C28130208BF171004E03E3 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
-		79C28131208BF171004E03E3 /* ModalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7966185B208C95BF0037AA55 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				7966185C208C95FB0037AA55 /* UIViewController+Additions.swift */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
 		79C28100208B6907004E03E3 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +79,7 @@
 		79C2810B208B6907004E03E3 /* EverpobrePt */ = {
 			isa = PBXGroup;
 			children = (
+				7966185B208C95BF0037AA55 /* Additions */,
 				79C2812F208B9931004E03E3 /* EverpobrePt.entitlements */,
 				79C2811E208B7B0F004E03E3 /* Model */,
 				79C2810C208B6907004E03E3 /* AppDelegate.swift */,
@@ -79,8 +90,8 @@
 				79C28128208B878D004E03E3 /* NoteViewController.xib */,
 				79C2812B208B88B2004E03E3 /* NotesTableViewController.swift */,
 				79C2812C208B88B2004E03E3 /* NotesTableViewController.xib */,
-				79C28130208BF171004E03E3 /* ModalViewController.swift */,
-				79C28131208BF171004E03E3 /* ModalViewController.xib */,
+				7966185E208CAC940037AA55 /* ModalTableViewController.swift */,
+				7966185F208CAC940037AA55 /* ModalTableViewController.xib */,
 			);
 			path = EverpobrePt;
 			sourceTree = "<group>";
@@ -167,7 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79C28117208B6908004E03E3 /* LaunchScreen.storyboard in Resources */,
-				79C28133208BF171004E03E3 /* ModalViewController.xib in Resources */,
+				79661861208CAC940037AA55 /* ModalTableViewController.xib in Resources */,
 				79C2812E208B88B2004E03E3 /* NotesTableViewController.xib in Resources */,
 				79C2812A208B878D004E03E3 /* NoteViewController.xib in Resources */,
 				79C28114208B6908004E03E3 /* Assets.xcassets in Resources */,
@@ -181,13 +192,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79661860208CAC940037AA55 /* ModalTableViewController.swift in Sources */,
 				79C28123208B7BF0004E03E3 /* DataManager.swift in Sources */,
 				79C28126208B7DBF004E03E3 /* Everpobre.xcdatamodeld in Sources */,
 				79C2810D208B6907004E03E3 /* AppDelegate.swift in Sources */,
 				79C28129208B878D004E03E3 /* NoteViewController.swift in Sources */,
+				7966185D208C95FB0037AA55 /* UIViewController+Additions.swift in Sources */,
 				79C28120208B7B73004E03E3 /* ManagedObject.swift in Sources */,
 				79C2812D208B88B2004E03E3 /* NotesTableViewController.swift in Sources */,
-				79C28132208BF171004E03E3 /* ModalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

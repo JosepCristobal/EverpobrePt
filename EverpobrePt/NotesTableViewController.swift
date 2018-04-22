@@ -157,12 +157,11 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     @objc func showModal() {
-        let modalViewController = ModalViewController()
-      
+        let modalTableViewController = ModalTableViewController()
         self.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         // Cover Vertical is necessary for CurrentContext
         self.modalPresentationStyle = .currentContext
         // Display on top of    current UIView
-        self.present(modalViewController, animated: true, completion: nil)
+        self.present(modalTableViewController.wrappedInNavigation(), animated: true, completion: nil)
     }
 }
