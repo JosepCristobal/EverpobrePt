@@ -10,6 +10,8 @@
 		7966185D208C95FB0037AA55 /* UIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7966185C208C95FB0037AA55 /* UIViewController+Additions.swift */; };
 		79661860208CAC940037AA55 /* ModalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7966185E208CAC940037AA55 /* ModalTableViewController.swift */; };
 		79661861208CAC940037AA55 /* ModalTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7966185F208CAC940037AA55 /* ModalTableViewController.xib */; };
+		7966186F208D27660037AA55 /* notas.png in Resources */ = {isa = PBXBuildFile; fileRef = 7966186E208D27660037AA55 /* notas.png */; };
+		79661871208D27770037AA55 /* isMain.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 79661870208D27770037AA55 /* isMain.jpeg */; };
 		79C2810D208B6907004E03E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2810C208B6907004E03E3 /* AppDelegate.swift */; };
 		79C28114208B6908004E03E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79C28113208B6908004E03E3 /* Assets.xcassets */; };
 		79C28117208B6908004E03E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C28115208B6908004E03E3 /* LaunchScreen.storyboard */; };
@@ -26,6 +28,8 @@
 		7966185C208C95FB0037AA55 /* UIViewController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Additions.swift"; sourceTree = "<group>"; };
 		7966185E208CAC940037AA55 /* ModalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTableViewController.swift; sourceTree = "<group>"; };
 		7966185F208CAC940037AA55 /* ModalTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalTableViewController.xib; sourceTree = "<group>"; };
+		7966186E208D27660037AA55 /* notas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notas.png; sourceTree = "<group>"; };
+		79661870208D27770037AA55 /* isMain.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = isMain.jpeg; sourceTree = "<group>"; };
 		79C28109208B6907004E03E3 /* EverpobrePt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EverpobrePt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C2810C208B6907004E03E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79C28113208B6908004E03E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 		7966185B208C95BF0037AA55 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				79661870208D27770037AA55 /* isMain.jpeg */,
+				7966186E208D27660037AA55 /* notas.png */,
 				7966185C208C95FB0037AA55 /* UIViewController+Additions.swift */,
 			);
 			path = Additions;
@@ -180,6 +186,8 @@
 				79C28117208B6908004E03E3 /* LaunchScreen.storyboard in Resources */,
 				79661861208CAC940037AA55 /* ModalTableViewController.xib in Resources */,
 				79C2812E208B88B2004E03E3 /* NotesTableViewController.xib in Resources */,
+				79661871208D27770037AA55 /* isMain.jpeg in Resources */,
+				7966186F208D27660037AA55 /* notas.png in Resources */,
 				79C2812A208B878D004E03E3 /* NoteViewController.xib in Resources */,
 				79C28114208B6908004E03E3 /* Assets.xcassets in Resources */,
 			);

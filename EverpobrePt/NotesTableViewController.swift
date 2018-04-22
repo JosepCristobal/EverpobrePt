@@ -9,45 +9,41 @@
 import UIKit
 import CoreData
 
+// TODO: - Queda pendiente de limpiar todas las pruebas y poder identificar el Notebook por defecto
+// para añadir todas las notas nuevas.
+// Crear una nota por defecto la primera vez que utilizamos la app
+
+
 class NotesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var fetchedResultController : NSFetchedResultsController<Note>!
+    var fetchedResultControllerNB : NSFetchedResultsController<Notebook>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let bt1 = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addNewNotebook))
-        let bt2 = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showModal))
+        //let bt1 = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addNewNotebook))
+        
+        let bt2 = UIBarButtonItem(title: "Nbook", style: .plain, target: self, action: #selector(showModal))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewNote))
         
-        //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addNewNotebook))
-        navigationItem.leftBarButtonItems = [bt1, bt2]
+        navigationItem.leftBarButtonItems = [bt2] //De momento no añadimos el bt1
         
-        // Fetch Request.
+        // Fetch Request Note.
         let viewMOC = DataManager.sharedManager.persistentContainer.viewContext
-        
-        
-        //        // 1.- Creamos el objeto
-        //        let fetchRequest =  NSFetchRequest<Note>()
-        //
-        //        // 2.- Que entidad es de la que queremos objeto.
-        //        fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Note", in: viewMOC)
-        
-        //   let fetchRequest = Note.fetchNoteRequest()
-        
         let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
         
-        // 3.- (Opcional) Indicamos orden.
+        // Indicamos orden.
         let sortByDate = NSSortDescriptor(key: "createdAtTI", ascending: true)
         let sortByTitle = NSSortDescriptor(key: "title", ascending: true)
         let sortByNotebook = NSSortDescriptor(key: "notebook.name", ascending: true)
         let sortByNotebookDefault = NSSortDescriptor(key: "notebook.isDefault", ascending: true)
         fetchRequest.sortDescriptors = [sortByNotebookDefault,sortByNotebook,sortByDate,sortByTitle]
         
-        // 4.- (Opcional) Filtrado.
-        let created24H = Date().timeIntervalSince1970 - 24 * 3600
-        let predicate = NSPredicate(format: "createdAtTI >= %f", created24H)
-        fetchRequest.predicate = predicate
+        // Filtrado.
+        //let created24H = Date().timeIntervalSince1970 - 24 * 3600
+        //let predicate = NSPredicate(format: "createdAtTI >= %f", created24H)
+        //fetchRequest.predicate = predicate
         
         fetchRequest.fetchBatchSize = 25
         
@@ -71,7 +67,6 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         return fetchedResultController.sections![section].numberOfObjects
         
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -99,9 +94,6 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteNotes(notes: fetchedResultController.object(at: indexPath))
-
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
@@ -130,19 +122,20 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     @objc func addNewNotebook() {
         
-        let notebook = NSEntityDescription.insertNewObject(forEntityName: "Notebook", into:
-        DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
-        notebook.name = "Nuevo Notebook3"
-        notebook.isDefault = 0
-        
-        try! DataManager.sharedManager.persistentContainer.viewContext.save()
+//        let notebook = NSEntityDescription.insertNewObject(forEntityName: "Notebook", into:
+//        DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
+//        notebook.name = "Nuevo Notebook3"
+//        notebook.isDefault = 0
+//
+//        try! DataManager.sharedManager.persistentContainer.viewContext.save()
         
     }
     func addProves(notes: Note){
-        let notebook = NSEntityDescription.insertNewObject(forEntityName: "Notebook", into:
-            DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
-        notebook.name = "Nuevo Notebook3"
-        notebook.isDefault = 0
+        let notebook = loadNoteBookMain()
+        //let notebook = NSEntityDescription.insertNewObject(forEntityName: "Notebook", into:
+           // DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
+        //notebook.name = "Nuevo Notebook3"
+        //notebook.isDefault = 0
         notebook.addToNotes(notes)
         
         try! DataManager.sharedManager.persistentContainer.viewContext.save()
@@ -163,5 +156,26 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         self.modalPresentationStyle = .currentContext
         // Display on top of    current UIView
         self.present(modalTableViewController.wrappedInNavigation(), animated: true, completion: nil)
+    }
+    
+    func loadNoteBookMain() -> Notebook{
+        // Fetch Request Notebook.
+        let viewMOCNB = DataManager.sharedManager.persistentContainer.viewContext
+        let fetchRequestNB = NSFetchRequest<Notebook>(entityName: "Notebook")
+    
+        // Filtrado.
+        let isMainNB = 1
+        let predicate = NSPredicate(format: "isDefault == %f", isMainNB)
+        fetchRequestNB.predicate = predicate
+        
+        fetchedResultControllerNB = NSFetchedResultsController(fetchRequest: fetchRequestNB, managedObjectContext: viewMOCNB, sectionNameKeyPath: nil, cacheName: nil)
+        
+        try! fetchedResultControllerNB.performFetch()
+        let obj = fetchedResultControllerNB.fetchedObjects
+        let nB: Notebook = obj?[0] as! Notebook
+        fetchedResultControllerNB.delegate = self
+        return nB
+        
+       
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+// TODO: - Quedará pendiente implementar el poder cambiar notas de Notebook y controlar duplicados
 
 class ModalTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate{
     var fetchedResultController : NSFetchedResultsController<Notebook>!
@@ -27,11 +28,6 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
         let sortByName = NSSortDescriptor(key: "name", ascending: true)
         
         fetchRequest.sortDescriptors = [sortByDefault, sortByName]
-        
-        //let mainItem = 0
-        //let predicate = NSPredicate(format: "isDefault == \(mainItem)")
-        
-        //fetchRequest.predicate = predicate
         
         fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewMOC, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -61,8 +57,9 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
         if fetchedResultController.object(at: indexPath).isDefault == 1 {
             cell?.textLabel?.textColor = .green
             cell?.textLabel?.font = UIFont.boldSystemFont(ofSize: 14.0)
+            cell?.imageView?.image = #imageLiteral(resourceName: "isMain.jpeg")
         }else{
-            
+            cell?.imageView?.image = #imageLiteral(resourceName: "notas.png")
         }
                 cell?.textLabel?.text = fetchedResultController.object(at: indexPath).name
                 cell?.detailTextLabel?.text = totNotes
@@ -86,8 +83,7 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     func deleteNotebooks(notebooks: Notebook){
-        //let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into:
-         //DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
+        
         if (notebooks.notes?.count)! > 0 {
             let actionSheetAlert = UIAlertController(title: NSLocalizedString("Existen notas asociadas al Notebook", comment: "Notebook"), message: nil, preferredStyle: .alert)
 
@@ -106,7 +102,6 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
     func isMainNote(noteBook: Notebook){
         let obj = fetchedResultController.fetchedObjects
         obj?.forEach({ (Notebok) in
-            print ("Elementos:\(Notebok.isDefault)")
             Notebok.isDefault = 0
         })
         
@@ -115,26 +110,6 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
         tableView.reloadData()
     }
     
-    func alertNotebook(){
-
-        let alert = UIAlertController(title: "Alert", message: "", preferredStyle: .alert)
-       
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "First Name"
-            textField.text = "First Name"
-        }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0]
-            textField?.delegate = self
-        }))
-        let a: Int = 1
-        print (a)
-        present(alert, animated: true, completion: nil)
-        
-        print ("El resultado es:")
-        
-    }
     
     @objc func addNotebook(){
         addNewNoteBook()
@@ -146,23 +121,24 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
         }
     }
     
-    //MARK: -Configuramos la ventana modal para insertar un nuevo notebook
+    //MARK: - Configuramos la ventana modal para insertar un nuevo notebook
+    
     var tField: UITextField!
     
     func configurationTextField(textField: UITextField!)
     {
         print("generating the TextField")
-        textField.placeholder = "Enter an item"
+        textField.placeholder = "Nuevo Notebook"
         tField = textField
     }
     
     func handleCancel(alertView: UIAlertAction!)
     {
-        print("Cancelled !!")
+        //print("Cancelled !!")
     }
     
     func addNewNoteBook(){
-        let alert = UIAlertController(title: "Enter Input", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Nuevo NoteBook", message: "", preferredStyle: .alert)
         alert.addTextField(configurationHandler: configurationTextField)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:handleCancel))
         alert.addAction(UIAlertAction(title: "Done", style: .default, handler:{ (UIAlertAction) in
