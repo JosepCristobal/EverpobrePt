@@ -26,6 +26,11 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
         
         fetchRequest.sortDescriptors = [sortByDefault, sortByName]
         
+        let mainItem = 1
+        let predicate = NSPredicate(format: "isDefault == \(mainItem)")
+        
+        fetchRequest.predicate = predicate
+        
         fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewMOC, sectionNameKeyPath: nil, cacheName: nil)
         
         
@@ -50,10 +55,10 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
               if cell == nil {
                    cell = UITableViewCell(style: .subtitle, reuseIdentifier: "reuseIdentifier")
                 }
-        let totNotes: String = ("Total de notas\(String(describing: fetchedResultController.object(at: indexPath).notes?.count))")
+        let totNotes: String = ("Total notes\(String(describing: fetchedResultController.object(at: indexPath).notes?.count))")
                 cell?.textLabel?.text = fetchedResultController.object(at: indexPath).name
                 cell?.detailTextLabel?.text = totNotes
-        
+        print (fetchedResultController.object(at: indexPath).isDefault)
               return cell!
            }
     
@@ -67,7 +72,7 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
     
         override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
            if editingStyle == .delete {
-                //deleteNotes(notes: fetchedResultController.object(at: indexPath))
+            deleteNotebooks(notebooks: fetchedResultController.object(at: indexPath))
                 print ("Delete")
             } else if editingStyle == .insert {
                // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -79,6 +84,23 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
         tableView.reloadData()
     }
     
+    func deleteNotebooks(notebooks: Notebook){
+        //let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into:
+        //  DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
+        if (notebooks.notes?.count)! > 0 {
+            let actionSheetAlert = UIAlertController(title: NSLocalizedString("Existen notas asociadas al Notebook", comment: "Notebook"), message: nil, preferredStyle: .alert)
+           
+            let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .destructive, handler: nil)
+            actionSheetAlert.addAction(cancel)
+            
+             present(actionSheetAlert, animated: true, completion: nil)
+            
+        }else{
+            try! DataManager.sharedManager.persistentContainer.viewContext.delete(notebooks)
+            try! DataManager.sharedManager.persistentContainer.viewContext.save()
+            
+        }
+    }
     
     @objc func backMain(){
         self.dismiss(animated: true) {

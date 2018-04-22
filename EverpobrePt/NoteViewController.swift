@@ -197,7 +197,7 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
     
     @objc func addLocation()
     {
-        
+        //TODO : Add location to notes
     }
     
     
