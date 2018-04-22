@@ -83,7 +83,9 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let noteViewController = NoteViewController()
         noteViewController.note = fetchedResultController.object(at: indexPath)
+        
         //addProves(notes: fetchedResultController.object(at: indexPath))
+        
         navigationController?.pushViewController(noteViewController, animated: true)
     }
     
