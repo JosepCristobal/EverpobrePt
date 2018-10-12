@@ -71,7 +71,7 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
             isMainNote(noteBook: fetchedResultController.object(at: indexPath))
         }
     
-        override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
            if editingStyle == .delete {
             deleteNotebooks(notebooks: fetchedResultController.object(at: indexPath))
             }
@@ -155,6 +155,8 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
     }))
         self.present(alert, animated: true, completion: {
             //print("completion block")
-    })}
+    })
+        
+    }
     
 }

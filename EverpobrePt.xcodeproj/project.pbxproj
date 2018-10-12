@@ -152,6 +152,7 @@
 				TargetAttributes = {
 					79C28108208B6907004E03E3 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -353,7 +354,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.josep.EverpobrePt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -372,7 +373,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.josep.EverpobrePt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

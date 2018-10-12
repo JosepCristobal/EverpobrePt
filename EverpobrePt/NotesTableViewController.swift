@@ -16,6 +16,7 @@ import CoreData
 
 class NotesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+  
     var fetchedResultController : NSFetchedResultsController<Note>!
     var fetchedResultControllerNB : NSFetchedResultsController<Notebook>!
     
@@ -25,7 +26,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         
         let bt2 = UIBarButtonItem(title: "Nbook", style: .plain, target: self, action: #selector(showModal))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewNote))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewNoteNew))
         
         navigationItem.leftBarButtonItems = [bt2] //De momento no añadimos el bt1
         
@@ -93,7 +94,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         return fetchedResultController.sections![section].name
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteNotes(notes: fetchedResultController.object(at: indexPath))
         }
@@ -117,6 +118,17 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         
             try! privateMOC.save()
         }
+    }
+    @objc func addNewNoteNew()  {
+        let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into:
+            DataManager.sharedManager.persistentContainer.viewContext) as! Note
+        let dict = ["title":"Nueva nota from KVC","createdAtTI":Date().timeIntervalSince1970] as [String : Any]
+
+        note.setValuesForKeys(dict)
+        try! DataManager.sharedManager.persistentContainer.viewContext.save()
+        
+        self.addProves(notes: note)
+       
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -165,17 +177,21 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         let viewMOCNB = DataManager.sharedManager.persistentContainer.viewContext
         let fetchRequestNB = NSFetchRequest<Notebook>(entityName: "Notebook")
     
+        //Orden obligatorio
+        let sortByNotebookDefaultNB = NSSortDescriptor(key: "isDefault", ascending: false)
+        fetchRequestNB.sortDescriptors = [sortByNotebookDefaultNB]
+        
         // Filtrado.
-        let isMainNB = 1
-        let predicate = NSPredicate(format: "isDefault == %f", isMainNB)
+        let isMainNB = 0
+        let predicate = NSPredicate(format: "isDefault != %f", isMainNB)
         fetchRequestNB.predicate = predicate
         
         fetchedResultControllerNB = NSFetchedResultsController(fetchRequest: fetchRequestNB, managedObjectContext: viewMOCNB, sectionNameKeyPath: nil, cacheName: nil)
         
         try! fetchedResultControllerNB.performFetch()
         let obj = fetchedResultControllerNB.fetchedObjects
-        let nB: Notebook = obj?[0] as! Notebook
         fetchedResultControllerNB.delegate = self
+        let nB: Notebook = obj![0]
         return nB
         
        
