@@ -16,15 +16,15 @@ import CoreData
 
 class NotesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-  
     var fetchedResultController : NSFetchedResultsController<Note>!
     var fetchedResultControllerNB : NSFetchedResultsController<Notebook>!
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //let bt1 = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addNewNotebook))
         
-        let bt2 = UIBarButtonItem(title: "Nbook", style: .plain, target: self, action: #selector(showModal))
+        let bt2 = UIBarButtonItem(title: "Ntbook", style: .plain, target: self, action: #selector(showModal))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewNoteNew))
         
@@ -53,9 +53,18 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         try! fetchedResultController.performFetch()
         
         fetchedResultController.delegate = self
+        
+        let obj = fetchedResultController.fetchedObjects
+        obj?.forEach({ (Note) in
+            if Note.notebook == nil
+            {
+                try! DataManager.sharedManager.persistentContainer.viewContext.delete(Note)
+                try! DataManager.sharedManager.persistentContainer.viewContext.save()
+            }
+        })
     }
     
-    
+   
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,8 +85,8 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
             cell = UITableViewCell(style: .default, reuseIdentifier: "reuseIdentifier")
         }
         
-        cell?.textLabel?.text = fetchedResultController.object(at: indexPath).title
-        return cell!
+            cell?.textLabel?.text = fetchedResultController.object(at: indexPath).title
+            return cell!
     }
     
     
@@ -94,6 +103,12 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         return fetchedResultController.sections![section].name
     }
     
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40  // or whatever
+    }
+    
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteNotes(notes: fetchedResultController.object(at: indexPath))
@@ -170,6 +185,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         self.modalPresentationStyle = .currentContext
         // Display on top of    current UIView
         self.present(modalTableViewController.wrappedInNavigation(), animated: true, completion: nil)
+        
     }
     
     func loadNoteBookMain() -> Notebook{

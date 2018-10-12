@@ -21,9 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // let noteVC = NoteViewByCodeController()  // NoteViewController()  //
         let notesTVC = NotesTableViewController(style: .plain)
         notesTVC.title = "Everpobre Notes"
+        
         let navController = UINavigationController(rootViewController: notesTVC)
         
-        window?.rootViewController = navController
+        let splitViewController = UISplitViewController()
+        splitViewController.view.backgroundColor = .white
+        splitViewController.viewControllers = [navController]
+        
+        
+        window?.rootViewController = splitViewController
         
         window?.makeKeyAndVisible()
         
