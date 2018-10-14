@@ -37,6 +37,9 @@ Notebook-Todas la notas estarán asociadas a un notebook, al inicio crearemos un
 -Añadir algunas etiquetas de identificación a los elementos.
 
 ## Opcionales
+
 •Localización (ingles / castellano), o al menos preparada para ello. 
+
 •Fuentes de texto de tamaño dinámicas (función de la configuración del usuario). 
+
 •Añadir alerta en fecha limite.
