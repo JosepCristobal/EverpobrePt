@@ -2,7 +2,9 @@
 
 Practica final IOS Avanzado - Everpobre
 
-RESUMEN EJECUTIVO Objetivo Completar la App Everpobre sobre la que hemos desarrollado parte del curso. 
+RESUMEN EJECUTIVO 
+
+Objetivo Completar la App Everpobre sobre la que hemos desarrollado parte del curso. 
 La dotaremos de navegación y nuevas funcionalidades. Navegación General-Usaremos un splitViewController. 
 La App será univiersal (iPad / iPhone) 
 -El master será el listado de notas, organizadas en secciones según su notebook. 
