@@ -1,7 +1,8 @@
 # EverpobrePt
 
 Práctica final IOS Avanzado - Everpobre
-![WiKi](https://github.com/JosepCristobal/EverpobrePt/wiki)
+
+[Ver WiKi](https://github.com/JosepCristobal/EverpobrePt/wiki)
 
 RESUMEN EJECUTIVO 
 
@@ -44,3 +45,5 @@ Notebook-Todas la notas estarán asociadas a un notebook, al inicio crearemos un
 •Fuentes de texto de tamaño dinámicas (función de la configuración del usuario). 
 
 •Añadir alerta en fecha limite.
+
+[Ver WiKi](https://github.com/JosepCristobal/EverpobrePt/wiki)
