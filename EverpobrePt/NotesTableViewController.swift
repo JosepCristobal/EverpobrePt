@@ -91,12 +91,21 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let noteViewController = NoteViewController()
-        noteViewController.note = fetchedResultController.object(at: indexPath)
+//        let noteViewController = NoteViewController()
+//        noteViewController.note = fetchedResultController.object(at: indexPath)
+//        navigationController?.pushViewController(noteViewController, animated: true)
         
-        //addProves(notes: fetchedResultController.object(at: indexPath))
+        //Tratamos SplitView ***********************************
         
-        navigationController?.pushViewController(noteViewController, animated: true)
+        let note = fetchedResultController.object(at: indexPath)
+        let noteVC = NoteViewController()
+        noteVC.note = note
+        
+        let detailNavController = UINavigationController(rootViewController: noteVC)
+        
+        splitViewController?.showDetailViewController(detailNavController, sender: nil)
+        
+        
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -105,7 +114,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40  // or whatever
+        return 40
     }
     
 
