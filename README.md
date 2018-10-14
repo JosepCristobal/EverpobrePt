@@ -1,6 +1,7 @@
 # EverpobrePt
 
 Práctica final IOS Avanzado - Everpobre
+![WiKi](https://github.com/JosepCristobal/EverpobrePt/wiki)
 
 RESUMEN EJECUTIVO 
 
