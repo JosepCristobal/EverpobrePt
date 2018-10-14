@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EverpobrePt/ModalTableViewController.swift"
-            timestampString = "561077865.368472"
+            timestampString = "561225694.075568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -25,140 +25,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EverpobrePt/ModalTableViewController.swift"
-            timestampString = "561077865.369084"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "deleteNotebook(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EverpobrePt/ModalTableViewController.swift"
-            timestampString = "561077865.369501"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "deleteNotebook(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in EverpobrePt.ModalTableViewController.deleteNotebook(EverpobrePt.Notebook) -&gt; ()"
-                  moduleName = "EverpobrePt"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jcm/Documents/Developsamples/EverpobrePt/EverpobrePt/ModalTableViewController.swift"
-                  timestampString = "561065326.148908"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "182"
-                  endingLineNumber = "182"
-                  offsetFromSymbolStart = "899">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in closure #1 (__C.UIAlertAction) -&gt; () in EverpobrePt.ModalTableViewController.deleteNotebook(EverpobrePt.Notebook) -&gt; ()"
-                  moduleName = "EverpobrePt"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jcm/Documents/Developsamples/EverpobrePt/EverpobrePt/ModalTableViewController.swift"
-                  timestampString = "561065326.152153"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "172"
-                  endingLineNumber = "172"
-                  offsetFromSymbolStart = "51">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EverpobrePt/ModalTableViewController.swift"
-            timestampString = "561077865.369916"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "deleteNotebook(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in EverpobrePt.ModalTableViewController.deleteNotebook(EverpobrePt.Notebook) -&gt; ()"
-                  moduleName = "EverpobrePt"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jcm/Documents/Developsamples/EverpobrePt/EverpobrePt/ModalTableViewController.swift"
-                  timestampString = "561065326.1592751"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "175"
-                  endingLineNumber = "175"
-                  offsetFromSymbolStart = "496">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (EverpobrePt.Notebook) -&gt; () in closure #1 (__C.UIAlertAction) -&gt; () in EverpobrePt.ModalTableViewController.deleteNotebook(EverpobrePt.Notebook) -&gt; ()"
-                  moduleName = "EverpobrePt"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jcm/Documents/Developsamples/EverpobrePt/EverpobrePt/ModalTableViewController.swift"
-                  timestampString = "561065326.1619051"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "176"
-                  endingLineNumber = "176"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EverpobrePt/ModalTableViewController.swift"
-            timestampString = "561077865.3703721"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "delete(book:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "EverpobrePt/NotesTableViewController.swift"
-            timestampString = "561206046.487914"
+            timestampString = "561225694.075676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "numberOfSections(in:)"
             landmarkType = "7">
          </BreakpointContent>

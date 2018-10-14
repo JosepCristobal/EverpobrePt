@@ -19,11 +19,11 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
     @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var ExpirationDate: UITextField!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var topLine: UIView!
     
     var bottomImgConstraint: NSLayoutConstraint!
     var rightImgConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var imageView: UIImageView!
+    //@IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var topImgConstraint: NSLayoutConstraint!
     
@@ -38,6 +38,9 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
     
     var relativePoint: CGPoint!
     var note: Note?
+    var pictures: [PhotoNote] = []
+    var imageViews: [UIImageView] = []
+
     
     
     override func viewDidLoad() {
@@ -54,6 +57,13 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
             ExpirationDate.placeholder = NSLocalizedString("Expiration date", comment: "")
         }
         locationLabel.text = note?.nameNb
+        pictures = note?.photonote?.sortedArray(using: [NSSortDescriptor(key: "tag", ascending: true)]) as! [PhotoNote]
+        
+        for picture  in pictures {
+            pictures.append(picture)
+            addNewImage(UIImage(data: picture.photo!)!, tag: Int(picture.tag), relativeX: picture.x, relativeY: picture.y)
+            
+        }
         
         // MARK: DatePicker
         let datePicker = UIDatePicker()
@@ -61,20 +71,11 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         ExpirationDate.inputView = datePicker
         
-        // MARK: Constraint by code
-        bottomImgConstraint = NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: noteTextView, attribute: .bottom, multiplier: 1, constant: -20)
-        rightImgConstraint = NSLayoutConstraint(item: imageView, attribute: .right, relatedBy: .equal, toItem: noteTextView, attribute: .right, multiplier: 1, constant: -20)
-        let constArray:[NSLayoutConstraint] = [bottomImgConstraint, rightImgConstraint]
-        view.addConstraints(constArray)
-        NSLayoutConstraint.deactivate(constArray)
-        
         
         // MARK: Navigation Controller
         navigationController?.isToolbarHidden = false
         
         let photoBarButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(catchPhoto))
-        
-        //        let fixSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)  // Ready to use.
         
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
@@ -82,93 +83,8 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
         
         self.setToolbarItems([photoBarButton,flexible,mapBarButton], animated: false)
         
-        // MARK: Gestures
-        
-        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(closeKeyboard))
-        swipeGesture.direction = .down
-        
-        view.addGestureRecognizer(swipeGesture)
-        
-        imageView.isUserInteractionEnabled = true
-        
-        //        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(moveImage))
-        //
-        //        doubleTapGesture.numberOfTapsRequired = 2
-        //
-        //        imageView.addGestureRecognizer(doubleTapGesture)
-        
-        let moveViewGesture = UILongPressGestureRecognizer(target: self, action: #selector(userMoveImage))
-        
-        imageView.addGestureRecognizer(moveViewGesture)
-        
     }
-    
-    @objc func userMoveImage(longPressGesture:UILongPressGestureRecognizer)
-    {
-        switch longPressGesture.state {
-        case .began:
-            closeKeyboard()
-            relativePoint = longPressGesture.location(in: longPressGesture.view)
-            UIView.animate(withDuration: 0.1, animations: {
-                self.imageView.transform = CGAffineTransform.init(scaleX: 1.2, y: 1.2)
-            })
-            
-        case .changed:
-            let location = longPressGesture.location(in: noteTextView)
-            
-            leftImgConstraint.constant = location.x - relativePoint.x
-            topImgConstraint.constant = location.y - relativePoint.y
-            
-        case .ended, .cancelled:
-            
-            UIView.animate(withDuration: 0.1, animations: {
-                self.imageView.transform = CGAffineTransform.init(scaleX: 1, y: 1)
-            })
-            
-        default:
-            break
-        }
-        
-    }
-    
-    
-    @objc func moveImage(tapGesture:UITapGestureRecognizer)
-    {
-        
-        if topImgConstraint.isActive
-        {
-            if leftImgConstraint.isActive
-            {
-                leftImgConstraint.isActive = false
-                rightImgConstraint.isActive = true
-            }
-            else
-            {
-                topImgConstraint.isActive = false
-                bottomImgConstraint.isActive = true
-            }
-        }
-        else
-        {
-            if leftImgConstraint.isActive
-            {
-                bottomImgConstraint.isActive = false
-                topImgConstraint.isActive = true
-            }
-            else
-            {
-                rightImgConstraint.isActive = false
-                leftImgConstraint.isActive = true
-            }
-        }
-        
-        UIView.animate(withDuration: 0.4) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    
-    
+
     @objc func closeKeyboard()
     {
         
@@ -195,16 +111,6 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
         }
     }
     
-    
-    override func viewDidLayoutSubviews()
-    {
-        var rect = view.convert(imageView.frame, to: noteTextView)
-        rect = rect.insetBy(dx: -15, dy: -15)
-        
-        let paths = UIBezierPath(rect: rect)
-        noteTextView.textContainer.exclusionPaths = [paths]
-    }
-    
     // MARK: Toolbar Buttons actions
     
     @objc func catchPhoto()
@@ -229,8 +135,6 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
         actionSheetAlert.addAction(usePhotoLibrary)
         actionSheetAlert.addAction(cancel)
         
-        
-        
         present(actionSheetAlert, animated: true, completion: nil)
     }
     
@@ -250,15 +154,39 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
     
     // MARK: Image Picker Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        // Local variable inserted by Swift 4.2 migrator.
-        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         
-        let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
+        let currentImages = note?.photonote?.count ?? 0
+        let tag = currentImages + 1
         
-        imageView.image = image
+        let xRelative = Double(tag*10) / Double(UIScreen.main.bounds.width)
+        let yRelative = Double(tag*10) / Double(UIScreen.main.bounds.height)
         
-        picker.dismiss(animated: true, completion: nil)
+        let backMOC = DataManager.sharedManager.persistentContainer.newBackgroundContext()
+        
+        backMOC.perform {
+            
+            let picture = NSEntityDescription.insertNewObject(forEntityName: "PhotoNote", into: backMOC) as! PhotoNote
+            
+            picture.x = xRelative
+            picture.y = yRelative
+            picture.rotation = 0
+            picture.scale = 1
+            picture.tag = Int64(tag)
+            picture.photo = image.pngData()
+            
+            picture.notesp = (backMOC.object(with: (self.note?.objectID)!) as! Note)
+            
+            try! backMOC.save()
+            
+            DispatchQueue.main.async {
+                self.pictures.append(DataManager.sharedManager.persistentContainer.viewContext.object(with: picture.objectID) as! PhotoNote)
+                self.addNewImage(image, tag: tag, relativeX: xRelative, relativeY: yRelative)
+                picker.dismiss(animated: true, completion: nil)
+            }
+        }
+        
         
     }
     

@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 
-// TODO: - Quedará pendiente implementar el poder cambiar notas de Notebook y controlar duplicados
 
 class ModalTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate{
     var fetchedResultController : NSFetchedResultsController<Notebook>!
@@ -95,7 +94,7 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     //Activamos las opciones de menú para cada row en la tableview Cambio de nombre, hacer por defecto y borrar
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        //let notebook = fetchedResultController.object(at: indexPath)
+        
         let changeNameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("ChangeName", comment: "")) { (tableViewRowAction, indexPath) in
             self.changeNoteBook(noteBook: self.fetchedResultController.object(at: indexPath))
         }
@@ -106,7 +105,7 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
 
         let deleteAction = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { (tableViewAction, indexPath) in
             self.deleteNotebook(self.fetchedResultController.object(at: indexPath))
-            //self.deleteNotebooks(notebooks: self.fetchedResultController.object(at: indexPath))
+         
         }
         
         
@@ -142,7 +141,6 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
         func delete(book:Notebook)
         {
             
-            //self.tableView.reloadData()
             DispatchQueue.main.async {
                 self.notebooks.remove(at: self.notebooks.index(of: book)!)
                 self.tableView.reloadData()
@@ -175,16 +173,13 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
                     { currentDefault = Notebok}
                 })
                 
-                
-                
                 privateMOC.perform {
                     let backNotebook = privateMOC.object(with: notebook.objectID) as! Notebook
                     let backCurrentDefault = privateMOC.object(with: (currentDefault!.objectID)) as! Notebook
                    
                     backCurrentDefault.addToNotes(backNotebook.notes!)
                     backNotebook.removeFromNotes(backNotebook.notes!)
-                    
-                    
+
                     try! privateMOC.save()
                     
                     delete(book: notebook)
@@ -229,7 +224,7 @@ class ModalTableViewController: UITableViewController, NSFetchedResultsControlle
     
     func configurationTextField(textField: UITextField!)
     {
-        print("generating the TextField")
+        //print("generating the TextField")
         textField.placeholder = "Nuevo Notebook"
         tField = textField
     }

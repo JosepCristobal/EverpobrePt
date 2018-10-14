@@ -18,9 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow()
         
-        // let noteVC = NoteViewByCodeController()  // NoteViewController()  //
         let notesTVC = NotesTableViewController(style: .plain)
-        notesTVC.title = "Everpobre Notes"
+        notesTVC.title = "Everpobre Notas"
         
         let navController = UINavigationController(rootViewController: notesTVC)
         

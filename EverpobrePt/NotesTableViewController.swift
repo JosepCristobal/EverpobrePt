@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-// TODO: - Queda pendiente de limpiar todas las pruebas y poder identificar el Notebook por defecto
-// para añadir todas las notas nuevas.
-// Crear una nota por defecto la primera vez que utilizamos la app
-
 
 class NotesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
@@ -22,13 +18,12 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //let bt1 = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addNewNotebook))
         
         let bt2 = UIBarButtonItem(title: "Ntbook", style: .plain, target: self, action: #selector(showModal))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewNoteNew))
         
-        navigationItem.leftBarButtonItems = [bt2] //De momento no añadimos el bt1
+        navigationItem.leftBarButtonItems = [bt2]
         
         // Fetch Request Note.
         let viewMOC = DataManager.sharedManager.persistentContainer.viewContext
@@ -54,6 +49,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         
         fetchedResultController.delegate = self
         
+        //Limpiamos notas que pueda haber quedado sin noteBook
         let obj = fetchedResultController.fetchedObjects
         obj?.forEach({ (Note) in
             if Note.notebook == nil
@@ -170,18 +166,12 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     func addProves(notes: Note){
         let notebook = loadNoteBookMain()
-        //let notebook = NSEntityDescription.insertNewObject(forEntityName: "Notebook", into:
-           // DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
-        //notebook.name = "Nuevo Notebook3"
-        //notebook.isDefault = 0
         notebook.addToNotes(notes)
         
         try! DataManager.sharedManager.persistentContainer.viewContext.save()
     
     }
     func deleteNotes(notes: Note){
-        //let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into:
-          //  DataManager.sharedManager.persistentContainer.viewContext) as! Notebook
         
         try! DataManager.sharedManager.persistentContainer.viewContext.delete(notes)
         try! DataManager.sharedManager.persistentContainer.viewContext.save()
