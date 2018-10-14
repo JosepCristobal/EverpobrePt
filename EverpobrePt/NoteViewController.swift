@@ -12,12 +12,13 @@ import CoreLocation
 
 
 class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate
-, UITextFieldDelegate, UITextViewDelegate{
+, UITextFieldDelegate, UITextViewDelegate, MapDelegate{
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var ExpirationDate: UITextField!
+    @IBOutlet weak var locationLabel: UILabel!
     
     var bottomImgConstraint: NSLayoutConstraint!
     var rightImgConstraint: NSLayoutConstraint!
@@ -52,6 +53,7 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
         } else {
             ExpirationDate.placeholder = NSLocalizedString("Expiration date", comment: "")
         }
+        locationLabel.text = note?.nameNb
         
         // MARK: DatePicker
         let datePicker = UIDatePicker()
@@ -235,7 +237,7 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
     @objc func addLocation(_ barButton:UIBarButtonItem)
     {
         let selectAddress = MapViewController()
-        //selectAddress.delegate = self
+        selectAddress.delegate = self
         let navController = UINavigationController(rootViewController: selectAddress)
         navController.modalPresentationStyle = UIModalPresentationStyle.popover
         let popOverCont = navController.popoverPresentationController
@@ -248,8 +250,8 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
     
     // MARK: Image Picker Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        // Local variable inserted by Swift 4.2 migrator.
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         
         let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
@@ -272,6 +274,23 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     func textViewDidChange(_ textView: UITextView) {
         note?.content = noteTextView.text
         try! note?.managedObjectContext?.save()
+    }
+    
+    // MARK: Select In Map Delegate
+    func address(_ address: String, lat: Double, lon: Double) {
+        locationLabel.text = address
+        let backMOC = DataManager.sharedManager.persistentContainer.newBackgroundContext()
+        
+        backMOC.perform {
+            
+            let backNote = (backMOC.object(with: (self.note?.objectID)!) as! Note)
+            backNote.nameNb = address
+            backNote.latitude = "\(lat)"
+            backNote.longitude = "\(lon)"
+            
+            try! backMOC.save()
+        }
+        
     }
     
 }

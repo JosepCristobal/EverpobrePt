@@ -39,8 +39,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let saveButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(confirmAddress))
         navigationItem.leftBarButtonItem = saveButton
         
-        let selectImage = UIImageView.init(image: #imageLiteral(resourceName: "mapSelect"))
-        view.addSubview(selectImage)
+       // let selectImage = UIImageView.init(image: #imageLiteral(resourceName: "mapSelect"))
+        //view.addSubview(selectImage)
         
         MKMapView.delegate = self
         
