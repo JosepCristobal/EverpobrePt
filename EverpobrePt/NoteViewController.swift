@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import CoreData
+import CoreLocation
+
 
 class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate
 , UITextFieldDelegate, UITextViewDelegate{
     
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var expirationDate: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextView: UITextView!
+    @IBOutlet weak var ExpirationDate: UITextField!
     
     var bottomImgConstraint: NSLayoutConstraint!
     var rightImgConstraint: NSLayoutConstraint!
@@ -25,6 +28,12 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
     
     @IBOutlet weak var leftImgConstraint: NSLayoutConstraint!
     
+    let dateFormatter = { () -> DateFormatter in
+        let dateF = DateFormatter()
+        dateF.dateStyle = .short
+        dateF.timeStyle = .none
+        return dateF
+    }()
     
     var relativePoint: CGPoint!
     var note: Note?
@@ -34,6 +43,22 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
         super.viewDidLoad()
         titleTextField.delegate = self
         noteTextView.delegate = self
+        
+        titleTextField.text = note?.title
+        noteTextView.text = note?.content
+        dateLabel.text = dateFormatter.string(from: Date(timeIntervalSince1970: (note?.createdAtTI)!))
+        if (note?.dateLimit)! > Double(0.0) {
+            ExpirationDate.text = dateFormatter.string(from: Date(timeIntervalSince1970: (note?.dateLimit)!))
+        } else {
+            ExpirationDate.placeholder = NSLocalizedString("Expiration date", comment: "")
+        }
+        
+        // MARK: DatePicker
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        ExpirationDate.inputView = datePicker
+        
         // MARK: Constraint by code
         bottomImgConstraint = NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: noteTextView, attribute: .bottom, multiplier: 1, constant: -20)
         rightImgConstraint = NSLayoutConstraint(item: imageView, attribute: .right, relatedBy: .equal, toItem: noteTextView, attribute: .right, multiplier: 1, constant: -20)
@@ -156,6 +181,18 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
         }
     }
     
+    // MARK: Date Picker
+    @objc func dateChanged(_ datePicker:UIDatePicker)
+    {
+        ExpirationDate.text = dateFormatter.string(from: datePicker.date)
+        let privateMOC = DataManager.sharedManager.persistentContainer.newBackgroundContext()
+        privateMOC.perform {
+            let privateNote = privateMOC.object(with: self.note!.objectID) as! Note
+            privateNote.dateLimit = datePicker.date.timeIntervalSince1970
+            try! privateMOC.save()
+        }
+    }
+    
     
     override func viewDidLayoutSubviews()
     {
@@ -195,9 +232,17 @@ class NoteViewController: UIViewController,  UIImagePickerControllerDelegate, UI
         present(actionSheetAlert, animated: true, completion: nil)
     }
     
-    @objc func addLocation()
+    @objc func addLocation(_ barButton:UIBarButtonItem)
     {
-        //TODO : Add location to notes
+        let selectAddress = MapViewController()
+        //selectAddress.delegate = self
+        let navController = UINavigationController(rootViewController: selectAddress)
+        navController.modalPresentationStyle = UIModalPresentationStyle.popover
+        let popOverCont = navController.popoverPresentationController
+        popOverCont?.barButtonItem = barButton
+        
+        present(navController, animated: true, completion: nil)
+        
     }
     
     
