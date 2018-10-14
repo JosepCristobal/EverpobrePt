@@ -1,6 +1,6 @@
 # EverpobrePt
 
-Practica final IOS Avanzado - Everpobre
+Práctica final IOS Avanzado - Everpobre
 
 RESUMEN EJECUTIVO 
 
